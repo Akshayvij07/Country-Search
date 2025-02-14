@@ -72,5 +72,7 @@ func buildResponse(data any, err error) *response.Response {
 
 // Map of error to response.The errorResponse map is used to map errors to their corresponding response
 var errorResponse = map[error]response.Response{
-	errors.ErrKeyNotFound: response.New(http.StatusNotFound, "country not found", nil, errors.ErrKeyNotFound.Error()),
+	errors.ErrKeyNotFound:    response.New(http.StatusNotFound, "country not found", nil, errors.ErrKeyNotFound.Error()),
+	errors.ErrInvalidCountry: response.New(http.StatusBadRequest, "invalid country name", nil, errors.ErrInvalidCountry.Error()),
+	errors.ErrParams:         response.New(http.StatusBadRequest, "invalid parameters", nil, errors.ErrParams.Error()),
 }
