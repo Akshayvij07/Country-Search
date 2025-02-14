@@ -2,6 +2,7 @@ package handler
 
 import (
 	"net/http"
+	"strings"
 
 	"github.com/rs/zerolog/log"
 
@@ -36,7 +37,7 @@ func (h *Handler) GetCountry(c *gin.Context) {
 
 	log.Info().Msgf("query: %v", query)
 
-	country, err := h.service.GetCountry(query.Name)
+	country, err := h.service.GetCountry(strings.ToLower(query.Name))
 	handleResponse(c, country, err)
 }
 
