@@ -2,6 +2,7 @@ package response
 
 import "net/http"
 
+//This is the response struct for all the responses
 type Response struct {
 	Status  int    `json:"status"`
 	Message string `json:"message"`
@@ -9,6 +10,7 @@ type Response struct {
 	Data    any    `json:"data,omitempty"`
 }
 
+// New create a new response
 func New(status int, message string, data any, error any) Response {
 	return Response{
 		Status:  status,

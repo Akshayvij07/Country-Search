@@ -17,10 +17,11 @@ type Handler struct {
 	service services.Services
 }
 
-func NewHandler(service services.Services) *Handler {
+func New(service services.Services) *Handler {
 	return &Handler{service: service}
 }
 
+// Handler function for fetching countryDetails
 func (h *Handler) GetCountry(c *gin.Context) {
 	var query request.CountryQuery
 
@@ -39,11 +40,13 @@ func (h *Handler) GetCountry(c *gin.Context) {
 	handleResponse(c, country, err)
 }
 
+// Helper function to handle response
 func handleResponse(c *gin.Context, data any, err error) {
 	resp := buildResponse(data, err)
 	c.JSON(resp.Status, resp)
 }
 
+// Helper function to build response
 func buildResponse(data any, err error) *response.Response {
 	var resp *response.Response
 	if err != nil {
@@ -66,6 +69,7 @@ func buildResponse(data any, err error) *response.Response {
 	return resp
 }
 
+// Map of error to response.The errorResponse map is used to map errors to their corresponding response
 var errorResponse = map[error]response.Response{
 	errors.ErrKeyNotFound: response.New(http.StatusNotFound, "country not found", nil, errors.ErrKeyNotFound.Error()),
 }
